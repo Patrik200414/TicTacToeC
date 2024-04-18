@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 void writeOutBoard(char board[3][3]){
     for(int i = 0; i < 3; i++){
@@ -56,20 +57,41 @@ int readUserInput(char board[3][3]) {
     }
 }
 
+void runGame(char board[3][3]){
+    bool isGameFinished = false;
+    bool isXTurn = true; 
+
+     while (!isGameFinished)
+     {
+        writeOutBoard(board);
+        int input = readUserInput(board);
+        if(isXTurn){
+            board[input / 3][input % 3] = 'x';
+            isXTurn = false;
+        } else{
+            board[input / 3][input % 3] = 'o';
+            isXTurn = true;
+        }
+     }
+     
+}
+
 int main(){
     char board [3][3] = {
         {' ',' ',' '},
         {' ',' ',' '},
         {' ',' ',' '}
     };
+    runGame(board);
+
     writeOutBoard(board);
-    // some code for testing the new functionality
+    /* // some code for testing the new functionality
     int input = readUserInput(board);
     board[input / 3][input % 3] = 'x';
     writeOutBoard(board);
     char* c = board;
     input = readUserInput(board);
     *(c + input) = 'x';
-    writeOutBoard(board);
+    writeOutBoard(board); */
     return 0;
 }
